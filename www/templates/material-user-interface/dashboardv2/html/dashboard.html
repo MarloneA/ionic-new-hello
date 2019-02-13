@@ -1,0 +1,167 @@
+<!--View Information-->
+<!--View name : Dashboard-->
+<!--Controller name : dashboardCtrl-->
+<!--Controller path : www/templates/material-user-interface/dashboard/js/controllers.js-->
+<!--State name : app.dashboard-->
+<!--URL : #app/dashboard-->
+
+<ion-view view-title="Dashboard">
+
+    <!--right button on navigation bar-->
+    <ion-nav-buttons side="right">
+        <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()"
+                   aria-label="Setting">
+            <i class="ion-android-more-vertical"></i>
+        </md-button>
+    </ion-nav-buttons> <!--end right button on navigation bar-->
+
+    <ion-nav-buttons side="left">
+        <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+    </ion-nav-buttons>
+
+
+    <!--toolbar section-->
+    <!-- <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium">
+        <div>
+            <h1>Material Designn</h1>
+
+            <h2>Ionic Material Design</h2>
+        </div>
+        <a class="md-button md-accent md-fab fab-toolbar-medium"
+           aria-label="Add">
+            <i class="icon ion-plus"></i>
+        </a>
+    </md-toolbar> -->
+    <!--end toolbar section-->
+
+    <!--dashboard section-->
+    <ion-content id="dashboard-content" class="the-dashboard donor noscroll">
+
+        <!--list section-->
+
+        <!--Below code it will disable animation to better performance-->
+
+
+        <md-card class='chartjs' scroll="false">
+            <md-card-content>
+
+
+                <h6 style="
+                    margin-bottom: 15px;
+                    text-align: center;
+                    display: none;
+                ">WEEKLY SUMMARY</h6>
+                <h6 style="margin:0;font-size: 12px;">KES {{weeklyStats}}<span style="
+                    float: none;
+                    font-size: 8px;
+                    margin-left: 3px;
+                ">this week<span></span></span></h6>
+
+                <div class="chartjs" ng-model="chartH = calcChartH();" style="height: {{chartH}}px; max-height: {{chartH}}px; min-height: {{chartH}}px; margin-top: 20px;">
+                    <canvas id="chartLinev2"></canvas>
+                </div>
+            </md-card-content>
+            <div class="md-actions" layout="row" layout-align="end center">
+                <a ng-click="theSummaryChartRev()" class="md-button" ng-class="weekRevSummary">Income</a>
+                <a ng-click="theSummaryChartExp()" class="md-button" ng-class="weekExpSummary">Expense</a>
+            </div>
+        </md-card>
+        <ion-scroll direction="y" style="min-height:110vh; max-height:110vh;">
+            <div class="recentStats">
+                    <md-subheader>Recent Transactions</md-subheader>
+                    <md-card ng-repeat="item in salesAndExpense" class="recent">
+                        <md-card-content>
+                            <div class="invoice-box expense" ng-if="item.expCount">
+                                <p>Expense</p>
+                                <div class="invoice-box-header" data-toggle-box="exp_invoice-dashexp{{date}}">
+                                    <strong ng-init="date = getExpenseKey(item);">{{date}}</strong><u class="color-black">KES {{item.dayTotal}}
+                                    <del class="color-gray-dark">{{item.expCount}} Payments</del>
+                                    </u>
+                                </div>
+                                    <div ng-repeat="prod in item" class="invoice-box-content" id="exp_invoice-dashexp{{date}}">
+                                        <div>
+                                            <div class="decoration bottom-0 top-30"></div>
+                                            <!-- <div class="invoice-box-item">
+                                                <em>Amount:</em> <strong>KES {{item.dayTotal}}</strong>
+                                            </div> -->
+                                            <div ng-repeat="prodItem in prod | orderBy:'-ts'" class="invoice-box-item">
+                                                <em>Time: {{prodItem.time}}<span>Expense Type: {{prodItem.itemType}}</span></em> 
+                                                <a href="#">{{prodItem.itemDesc}}<i ng-click='attachedPic($event,(prodItem.imgUrl))'; class="fa fa-picture-o" aria-hidden="true"></i><u>KES {{prodItem.itemCost}}</u></a>
+                                            </div>
+                                            <!-- <div class="decoration bottom-0 top-10"></div> -->
+                                        </div>
+                                    </div>
+                            </div>
+
+<!--                             <div class="invoice-box revenue" ng-if="item.itemCount">
+                                <p>Income</p>
+                                <div class="invoice-box-header" data-toggle-box="exp_invoice-income{{date}}">
+                                    <strong ng-init="date = getExpenseKey(item);">{{date}}</strong><u class="color-black">KES {{item.dayTotal}}
+                                    <del class="color-gray-dark">{{item.expCount}} Payments</del>
+                                    </u>
+                                </div>
+                                <div ng-repeat="prod in item" class="invoice-box-content" id="exp_invoice-income{{date}}">
+                                    <div>
+                                        <div class="decoration bottom-0 top-30"></div>
+                                        <div class="invoice-box-item">
+                                            <em>Amount:</em> <strong>KES {{item.dayTotal}}</strong>
+                                        </div>
+
+                                        <div ng-repeat="prodItem in prod | orderBy:'-ts'" class="invoice-box-item">
+                                            <em>Time: {{prodItem.time}}<span>Component: {{prodItem.itemTitle}}</span></em> 
+                                            <a href="#">{{prodItem.itemType}}<i ng-click='attachedPic($event,(prodItem.imgUrl))'; class="fa fa-picture-o" aria-hidden="true"></i><u>KES {{prodItem.itemCost}}</u></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="invoice-box revenue" ng-if="item.itemCount">
+                                <p>Income</p>
+                                <div class="invoice-box-header" data-toggle-box="invoice-dashrev{{date}}">
+                                    <strong ng-init="date = getKey(item);">{{date}}</strong><u class="color-black">KES {{item.dayTotal}}
+                                    <del class="color-gray-dark">{{item.itemCount}} Transactions</del>
+                                    </u>
+                                </div>
+                                    <div ng-repeat="prod in item" class="invoice-box-content" id="invoice-dashrev{{date}}">
+                                        <div>
+                                            <div class="decoration bottom-0 top-30"></div>
+                                            <!-- <div class="invoice-box-item">
+                                                <em>Amount:</em> <strong>KES {{item.dayTotal}}</strong>
+                                            </div> -->
+
+                                            <div ng-repeat="prodItem in prod | orderBy:'-ts'" class="invoice-box-item">
+                                                <em>Time: {{prodItem.time}}<span>Component: {{prodItem.itemTitle}}</span></em> 
+                                                <a href="#">{{prodItem.itemType}}<i ng-click='attachedPic($event,(prodItem.imgUrl))'; class="fa fa-picture-o" aria-hidden="true"></i><u>KES {{prodItem.itemCost}}</u></a>
+                                            </div>
+
+
+                                            <!-- <div class="decoration bottom-0 top-10"></div> -->
+                                        </div>
+                                    </div>
+                            </div>
+
+                        </md-card-content>
+                    </md-card>
+            </div>
+        </ion-scroll>
+    </ion-content>
+
+    <ion-tabs class="tabs-icon-bottom">
+        <ion-tab class="hide" title="Home" icon="ion-home" ui-sref="app.dashboardv2">
+        </ion-tab>
+<!--         <ion-tab title="Add Income" icon="ion-cash" ui-sref="app.locationFeed">
+        </ion-tab> -->
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.catalogv2">
+        </ion-tab>
+        <ion-tab title="Budget Report" icon="ion-record" ui-sref="app.clothShop">
+        </ion-tab>
+        <ion-tab title="Income Report" icon="ion-record" ui-sref="app.onlineCourse">
+        </ion-tab>
+        <!--<ion-tab title="Add Sale" icon="ion-cash" ui-sref="app.instagramFeed">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.instagramFeed">
+        </ion-tab> -->
+    </ion-tabs>
+
+
+</ion-view>

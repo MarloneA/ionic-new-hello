@@ -1,0 +1,125 @@
+<!--View Information-->
+<!--View name : Default User Interface-->
+<!--Controller name : defaultUserInterfaceCtrl-->
+<!--Controller path : www/templates/material-user-interface/default-user-interface/js/controllers.js-->
+<!--State name : app.defaultUI-->
+<!--URL : #app/defaultUI-->
+
+
+
+<!--View Information-->
+<!--View name : Dashboard-->
+<!--Controller name : dashboardCtrl-->
+<!--Controller path : www/templates/material-user-interface/dashboard/js/controllers.js-->
+<!--State name : app.dashboard-->
+<!--URL : #app/dashboard-->
+
+<ion-view title="Record Sales">
+
+    <!--right button on navigation bar-->
+    <ion-nav-buttons side="right">
+        <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()"
+                   aria-label="Setting">
+            <i class="ion-android-more-vertical"></i>
+        </md-button>
+    </ion-nav-buttons> <!--end right button on navigation bar-->
+
+    <ion-nav-buttons side="left">
+        <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+    </ion-nav-buttons>
+
+
+    <!--toolbar section-->
+    <!-- <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium">
+        <div>
+            <h1>Material Designn</h1>
+
+            <h2>Ionic Material Design</h2>
+        </div>
+        <a class="md-button md-accent md-fab fab-toolbar-medium"
+           aria-label="Add">
+            <i class="icon ion-plus"></i>
+        </a>
+    </md-toolbar> -->
+    <!--end toolbar section-->
+
+    <!--dashboard section-->
+    <ion-content id="dashboard-content" class="investor sales">
+
+            <md-card class="searchform">
+                <md-card-content>
+
+
+                    <div class="search">
+                        <form name="contractForm">
+<!--                             <ion-content id="default-input-content">
+                                <md-input-container class="icon-title" md-no-float>
+                                    <i class="ion-search"></i>
+                                    <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="Search All Items" ng-model="query"/>
+                                </md-input-container>
+                            </ion-content> -->
+                                    <i class="ion-search"></i>
+                                    <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="Search All Items" ng-model="query"/>
+                        </form>
+                    </div>
+
+                </md-card-content>
+            </md-card>
+
+
+
+
+
+
+        <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" ng-repeat="item in items | filter:query | orderBy:'title'" ng-init="((item.in_stock)<1) ? outOfStock=true : outOfStock=false;" class="fac fac-checkbox fac-default {{item.selected}}">
+            <div class="checkbox-container">
+
+                <md-checkbox aria-label="Checkbox" ng-click="enableCounter(item,outOfStock)" ng-model="item.selected" ng-disabled="outOfStock" id="box1-fac-checkbox-{{item.id}}" type="checkbox" value="{{item.id}}">
+                    <span ng-init='(item.title === "") ?  itemTitle = "No Name" : itemTitle = item.title' for="box1-fac-checkbox-{{item.id}}">{{itemTitle}}<em>KES {{item.sell_price}} | <span ng-style="(item.in_stock<1) && {'color':'red'} || {'color': 'green'}">Stock Count: {{item.in_stock}}</span></em> </span>
+
+                </md-checkbox>
+
+                <span class="qtybtn" ng-init="theQuatity = item.count;">
+                    <a ng-click="minusCount(item)" ng-disabled="item.counter" class="md-raised md-button md-default-theme"><i class="fa fa-minus"></i></a>
+                    <input class="qty" type="number" ng-disabled="item.counter" ng-model="item.count" placeholder="1">
+                    <!-- <span class="qty">1</span> -->
+                    <a ng-click="addCount(item)" ng-disabled="item.counter" class="md-raised md-button md-default-theme"><i class="fa fa-plus"></i></a>
+                </span>
+            </div>
+        </md-whiteframe>
+    </ion-content><!--end dashboard section-->
+
+
+
+        <a class="md-button md-accent md-fab sell" ng-click='sellItems(); showConfirmDialog($event); showSaleAlertDialog($event);' aria-label="Shop">
+            <i class="fa fa-shopping-cart"></i>
+        </a>
+
+
+    <ion-tabs class="tabs-icon-bottom">
+        <ion-tab class="hide" title="Home" icon="ion-home" ui-sref="app.newsFeed">
+        </ion-tab>
+        <ion-tab title="Add Sale" icon="ion-cash" ui-sref="app.newsFeed">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.catalog">
+        </ion-tab>
+        <ion-tab title="Sales Report" icon="ion-record" ui-sref="app.expense">
+        </ion-tab>
+        <ion-tab title="Expense Report" icon="ion-record" ui-sref="app.menuDashboard">
+        </ion-tab>
+        <!--<ion-tab title="Add Sale" icon="ion-cash" ui-sref="app.instagramFeed">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.instagramFeed">
+        </ion-tab> -->
+    </ion-tabs>
+
+
+</ion-view>
+
+
+
+
+
+<!--angular template section-->
+
+<!--end angular template section

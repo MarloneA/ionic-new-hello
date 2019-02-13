@@ -1,0 +1,128 @@
+<!--View Information-->
+<!--View name : Dashboard-->
+<!--Controller name : dashboardCtrl-->
+<!--Controller path : www/templates/material-user-interface/dashboard/js/controllers.js-->
+<!--State name : app.dashboard-->
+<!--URL : #app/dashboard-->
+
+<ion-view view-title="Approved Expenses">
+
+    <!--right button on navigation bar-->
+    <ion-nav-buttons side="right">
+        <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()"
+                   aria-label="Setting">
+            <i class="ion-android-more-vertical"></i>
+        </md-button>
+    </ion-nav-buttons> <!--end right button on navigation bar-->
+
+    <ion-nav-buttons side="left">
+        <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+    </ion-nav-buttons>
+
+
+    <!--toolbar section-->
+    <!-- <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium">
+        <div>
+            <h1>Material Designn</h1>
+
+            <h2>Ionic Material Design</h2>
+        </div>
+        <a class="md-button md-accent md-fab fab-toolbar-medium"
+           aria-label="Add">
+            <i class="icon ion-plus"></i>
+        </a>
+    </md-toolbar> -->
+    <!--end toolbar section-->
+
+    <!--dashboard section-->
+    <ion-content id="dashboard-content" class="expense-report donor_expense_report the-revenue-expense expenses-approvals noscroll">
+
+        <!--list section-->
+        <md-card>
+            <md-card-content>
+
+
+                <h6 style="
+                    margin-bottom: 15px;
+                    text-align: center;
+                    display: none;
+                ">WEEKLY SUMMARY</h6>
+                <h6 style="margin:0;font-size: 12px; display: none;">KES {{todayStats}}<span style="
+                    float: none;
+                    font-size: 8px;
+                    margin-left: 3px;
+                ">last 24 Hrs<span></span></span></h6>
+
+                <div class="chartjs approved_expstats">
+                    <canvas id="donorIncomePieChart"></canvas>
+                </div>
+            </md-card-content>
+        </md-card>
+
+        <!--Below code it will disable animation to better performance-->
+
+        <ion-scroll direction="y" style="max-height:100vh; min-height:100vh !important;">
+            <div class="recentStats">
+
+                <h5 style="display: none; margin: 0 20px;" class="approved_expstats">
+                    KES {{totalApprovedAmount}} approved<span style="float: right;">KES {{totalSpentAmount-totalApprovedAmount}} pending</span>
+                </h5>
+
+                <!-- <md-subheader>Received Income</md-subheader> -->
+                <!-- <md-subheader>{{errorArrays}}</md-subheader> -->
+                <md-card ng-repeat="item in theMonthlyExpenses" class="recent">
+                    <md-card-content>
+                        <div class="invoice-box revenue {{item.dayTotal>0 ? 'ungreyout' : 'un-greyout'}}" ng-if="item.expCount">
+                            <p>
+                                <strong>{{item.expCount-item.pendingExps}} Approved</strong><strong>{{item.pendingExps}} Pending</strong>
+                            </p>
+                            <div class="invoice-box-header" data-toggle-box="exp_invoice-income{{date}}">
+                                <strong ng-init="date = getExpenseKey(item);">{{date}}</strong><u class="color-black"><strong>KES {{item.dayTotal}}</strong><strong>KES {{item.spentTotal-item.dayTotal}}</strong><strike style="display: none;" ng-if="item.dayTotal<1">KES {{item.spentTotal}}</strike>
+                                <del class="color-gray-dark"><strong>{{item.expCount-item.pendingExps}} Approved</strong><strong>{{item.pendingExps}} Pending</strong></del>
+                                </u>
+                            </div>
+                            <div ng-repeat="prod in item" class="invoice-box-content" id="exp_invoice-income{{date}}">
+                                <div>
+                                    <div class="decoration bottom-0 top-30"></div>
+                                    <!-- <div class="invoice-box-item">
+                                        <em>Amount:</em> <strong>KES {{item.dayTotal}}</strong>
+                                    </div> -->
+
+                                    <div ng-repeat="prodItem in prod | orderBy:'-ts'" class="invoice-box-item {{prodItem.itemCost>0 ? 'ungreyout' : 'greyout'}}">
+                                        <em>Time: {{prodItem.time}}<span>Component: {{prodItem.itemDesc}}</span></em> 
+                                        <a href="#">{{prodItem.itemType}}<i ng-click='attachedPic($event,(prodItem.imgUrl))'; class="fa fa-picture-o" aria-hidden="true"></i><u>KES {{prodItem.approvedCost}} <strike style="display: none;" ng-if="prodItem.itemCost<1">KES {{prodItem.approvedCost}}</strike></u></a>
+                                    </div>
+                                    <!-- <div class="decoration bottom-0 top-10"></div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </ion-scroll>
+
+    </ion-content><!--end dashboard section-->
+
+    <a class="md-button md-accent md-fab sell" ng-click='refreshView();' aria-label="Shop">
+       <i class="fa fa-refresh {{refreshStatus}}"></i>
+    </a>
+
+    <ion-tabs class="tabs-icon-bottom">
+        <ion-tab class="hide" title="Home" icon="ion-home" ui-sref="app.onlineCourse">
+        </ion-tab>
+        <ion-tab title="Add Income" icon="ion-cash" ui-sref="app.locationFeed">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.catalogv2">
+        </ion-tab>
+        <ion-tab title="Budget Report" icon="ion-record" ui-sref="app.clothShop">
+        </ion-tab>
+        <ion-tab title="Income Report" icon="ion-record" ng-click="openTabs();" ui-sref="app.onlineCourse">
+        </ion-tab>
+              <!--<ion-tab title="Add Sale" icon="ion-cash" ui-sref="app.instagramFeed">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.instagramFeed">
+        </ion-tab> -->
+    </ion-tabs>
+
+
+</ion-view>

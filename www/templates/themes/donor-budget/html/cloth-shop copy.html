@@ -1,0 +1,136 @@
+<!--View Information-->
+<!--View name : Default User Interface-->
+<!--Controller name : defaultUserInterfaceCtrl-->
+<!--Controller path : www/templates/material-user-interface/default-user-interface/js/controllers.js-->
+<!--State name : app.defaultUI-->
+<!--URL : #app/defaultUI-->
+
+
+
+<!--View Information-->
+<!--View name : Dashboard-->
+<!--Controller name : dashboardCtrl-->
+<!--Controller path : www/templates/material-user-interface/dashboard/js/controllers.js-->
+<!--State name : app.dashboard-->
+<!--URL : #app/dashboard-->
+
+<ion-view title="Budget Analysis">
+
+    <!--right button on navigation bar-->
+    <ion-nav-buttons side="right">
+        <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()"
+                   aria-label="Setting">
+            <i class="ion-android-more-vertical"></i>
+        </md-button>
+    </ion-nav-buttons> <!--end right button on navigation bar-->
+
+    <ion-nav-buttons side="left">
+        <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+    </ion-nav-buttons>
+
+
+    <!--toolbar section-->
+    <!-- <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium">
+        <div>
+            <h1>Material Designn</h1>
+
+            <h2>Ionic Material Design</h2>
+        </div>
+        <a class="md-button md-accent md-fab fab-toolbar-medium"
+           aria-label="Add">
+            <i class="icon ion-plus"></i>
+        </a>
+    </md-toolbar> -->
+    <!--end toolbar section-->
+
+    <!--dashboard section-->
+    <ion-content id="dashboard-content" class="sales budget">
+
+            <md-card class="searchform">
+                <md-card-content>
+
+
+                    <div class="search" ng-hide="true">
+                        <form name="contractForm">
+                            <!-- <ion-content id="default-input-content">
+                                <md-input-container class="icon-title" md-no-float>
+                                    <i class="ion-search"></i>
+                                    <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="Search All Items" ng-model="query"/>
+                                </md-input-container>
+                            </ion-content> -->
+                                    <i class="ion-search"></i>
+                                    <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="Search All Items" ng-model="query"/>
+                        </form>
+                    </div>
+
+                    <div class="md-actions" layout="row" layout-align="end center">
+                        <a href="" ng-click="thebudgetWk()" class="md-button" ng-class="weekBudgetSummary" tabindex="0">Week</a>
+                        <a href="" ng-click="thebudgetMth()" class="md-button" ng-class="monthBudgetSummary" tabindex="0">Month</a>
+                        <a href="" ng-click="thebudgetYr()" class="md-button" ng-class="yearBudgetSummary" tabindex="0">Year</a>
+                    </div>
+
+                </md-card-content>
+            </md-card>
+
+        <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" ng-repeat="item in budgetitems | filter:query | orderBy:'title'" class="fac fac-checkbox fac-default {{item.selected}}" ng-model="pieColor = colorCode(item.budgetRatio*100)">
+            <div class="checkbox-container">
+
+                <md-checkbox ng-click="addBudgetAnalysisDialog($event,item)" aria-label="Checkbox" id="box1-fac-checkbox-{{item.id}}" type="checkbox" value="{{item.id}}">
+
+                    <span ng-init='(item.title === "") ?  itemTitle = "No Name" : itemTitle = item.budgetType' for="box1-fac-checkbox-{{item.id}}">{{itemTitle}}<em>KES {{(item.budgetSpent).toFixed(0)}} spent | KES {{(item.budgetSum).toFixed(0)}} Budgeted</em> </span>
+
+                </md-checkbox>
+
+                <span class="qtybtn">
+                    <div class="ko-progress-circle" my-progress="{{((item.budgetRatio*100) > 100) ? 100:(item.budgetRatio*100)}}" data-progress="{{((item.budgetRatio*100) > 100) ? 100:(item.budgetRatio*100)}}">
+                        <div class="ko-circle">
+                            <div class="full ko-progress-circle__slice">
+                                <div class="ko-progress-circle__fill" style="background-color: {{pieColor}} !important"></div>
+                            </div>
+                            <div class="ko-progress-circle__slice">
+                                <div class="ko-progress-circle__fill" style="background-color: {{pieColor}} !important"></div>
+                                <div class="ko-progress-circle__fill ko-progress-circle__bar" style="background-color: {{pieColor}} !important"></div>
+                            </div>
+                        </div>
+                        <div class="ko-progress-circle__overlay">{{((item.budgetRatio*100) >= 100) ? (item.budgetRatio*100).toFixed(0):(item.budgetRatio*100).toFixed(1)}}%</div>
+                    </div>
+                </span>
+
+                <div class="extras" style="color: {{pieColor}} !important">{{((item.budgetRatio*100) >= 100) ? 'OVER BUDGET':(((item.budgetRatio*100) >= 80) ? 'HIGH SPENDING':'ON TARGET')}}<i ng-show="((item.budgetRatio*100) >= 100) ? true:false" class="fa fa-exclamation-triangle"></i><i ng-show="(((item.budgetRatio*100) >= 80)&&((item.budgetRatio*100) < 100)) ? true:false" class="fa fa-exclamation-circle"></i><i ng-show="((item.budgetRatio*100) < 80) ? true:false" class="fa fa-check-circle"></i></div>
+
+            </div>
+        </md-whiteframe>
+    </ion-content><!--end dashboard section-->
+
+        <a class="md-button md-accent md-fab sell" ng-click='addBudgetItemsDialog($event);' aria-label="Shop">
+           <i class="fa fa-plus"></i>
+        </a>
+
+
+    <ion-tabs class="tabs-icon-bottom">
+        <ion-tab class="hide" title="Home" icon="ion-home" ui-sref="app.clothShop">
+        </ion-tab>
+        <ion-tab title="Add Income" icon="ion-cash" ui-sref="app.locationFeed">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.catalogv2">
+        </ion-tab>
+        <ion-tab title="Budget Report" icon="ion-record" ui-sref="app.clothShop">
+        </ion-tab>
+        <ion-tab title="Income Report" icon="ion-record" ui-sref="app.onlineCourse">
+        </ion-tab>
+        <!--<ion-tab title="Add Sale" icon="ion-cash" ui-sref="app.instagramFeed">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.instagramFeed">
+        </ion-tab> -->
+    </ion-tabs>
+
+
+</ion-view>
+
+
+
+
+
+<!--angular template section-->
+
+<!--end angular template section

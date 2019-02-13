@@ -1,0 +1,142 @@
+<!--View Information-->
+<!--View name : Default User Interface-->
+<!--Controller name : defaultUserInterfaceCtrl-->
+<!--Controller path : www/templates/material-user-interface/default-user-interface/js/controllers.js-->
+<!--State name : app.defaultUI-->
+<!--URL : #app/defaultUI-->
+
+<!--View Information-->
+<!--View name : Dashboard-->
+<!--Controller name : dashboardCtrl-->
+<!--Controller path : www/templates/material-user-interface/dashboard/js/controllers.js-->
+<!--State name : app.dashboard-->
+<!--URL : #app/dashboard-->
+
+<ion-view title="Talk to us">
+
+    <!--right button on navigation bar-->
+    <ion-nav-buttons side="right">
+        <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()"
+                   aria-label="Setting">
+            <i class="ion-android-more-vertical"></i>
+        </md-button>
+    </ion-nav-buttons> <!--end right button on navigation bar-->
+
+    <ion-nav-buttons side="left">
+        <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+    </ion-nav-buttons>
+
+
+    <!--toolbar section-->
+    <!-- <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium">
+        <div>
+            <h1>Material Designn</h1>
+
+            <h2>Ionic Material Design</h2>
+        </div>
+        <a class="md-button md-accent md-fab fab-toolbar-medium"
+           aria-label="Add">
+            <i class="icon ion-plus"></i>
+        </a>
+    </md-toolbar> -->
+    <!--end toolbar section-->
+
+    <!--dashboard section-->
+    <ion-content id="dashboard-content" class="expenses contact_form">
+
+            <md-card class="searchform">
+                <md-card-content>
+
+                    <!-- <div class="content"> -->
+                        <div class="col-100 {{contactNameWarning}}">
+                            <strong>Required Field</strong>
+                            <em>Your Name</em>
+                            <md-input-container md-no-float="" class="md-list-item-full-width">
+                                <input ng-change="validateForm(1,contactName);" ng-model="contactName" placeholder="Enter your name">
+                            </md-input-container>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="col-100 {{contactEmailWarning}}">
+                            <strong>Required Field</strong>
+                            <em>Your Email</em>
+                            <md-input-container md-no-float="" class="md-list-item-full-width">
+                                <input ng-change="validateForm(2,contactEmail);" ng-model="contactEmail" placeholder="Enter your email">
+                            </md-input-container>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="col-100 {{contactPhoneWarning}}">
+                            <strong>Required Field</strong>
+                            <em>Your Phone Number</em>
+                            <md-input-container md-no-float="" class="md-list-item-full-width">
+                                <input ng-change="validateForm(3,contactPhone);" ng-model="contactPhone" placeholder="Enter your phone" type="number">
+                            </md-input-container>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="col-100 {{contactMessageWarning}}">
+                            <strong>Required Field</strong>
+                            <em>Your Message</em>
+                            <md-input-container md-no-float="" class="md-list-item-full-width">
+                                <textarea style="height: 200px;" ng-change="validateForm(4,contactMessage);" ng-model="contactMessage" placeholder="Leave us a message"></textarea>
+                            </md-input-container>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="call-to-action">
+
+                            
+
+
+                          <!--   <button ng-show="showFiles" style="margin-bottom: 45px; background-color: red;" type="button" class="button button-full button-rounded button-green uppercase ultrabold cancel_file" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                                <span class="glyphicon glyphicon-ban-circle"></span> Cancel File
+                            </button> -->
+                            
+                            <a href="#" ng-click="submitContactForm();" data-menu="menu-confirmation" class="button button-full button-rounded button-green uppercase ultrabold take_photo">Submit Message</a>
+
+                            <!-- <button data-menu="menu-confirmation" style="background-color: green;" type="button" class="button button-full button-rounded button-green uppercase ultrabold remove_file" ng-click="submitUploadRecord();">
+                                <span class="glyphicon glyphicon-trash"></span> Submit Record
+                            </button> -->
+
+                        </div>
+
+                    <!-- </div> -->
+                </md-card-content>
+            </md-card>
+
+
+
+
+    </ion-content><!--end dashboard section-->
+
+
+
+        <!-- <a class="md-button md-accent md-fab sell" ng-click='sellItems(); showConfirmDialog($event)' aria-label="Shop">
+            <i class="fa fa-shopping-cart"></i>
+        </a> -->
+
+
+    <ion-tabs class="tabs-icon-bottom">
+        <ion-tab class="hide" title="Home" icon="ion-home" ui-sref="app.contacts">
+        </ion-tab>
+<!--         <ion-tab title="Add Income" icon="ion-cash" ui-sref="app.locationFeed">
+        </ion-tab> -->
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.catalogv2">
+        </ion-tab>
+        <ion-tab title="Budget Report" icon="ion-record" ui-sref="app.clothShop">
+        </ion-tab>
+        <ion-tab title="Income Report" icon="ion-record" ui-sref="app.onlineCourse">
+        </ion-tab>
+        <!--<ion-tab title="Add Sale" icon="ion-cash" ui-sref="app.instagramFeed">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.instagramFeed">
+        </ion-tab> -->
+    </ion-tabs>
+
+
+</ion-view>
+
+
+
+
+
+<!--angular template section-->
+
+<!--end angular template section

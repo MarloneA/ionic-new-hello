@@ -1,0 +1,615 @@
+<!--View Information-->
+<!--View name : Menu-->
+<!--Controller name : menuCtrl-->
+<!--Controller path : www/templates/menu/js/controllers.js-->
+<!--State name : app-->
+<!--URL : #app-->
+
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-balanced  material-background-nav-bar">
+            <ion-nav-buttons side="left">
+                <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+    <md-sidenav md-component-id="left" on-swipe-left="closeSideNav()" on-drag-left="closeSideNav()">
+        <!--menu section-->
+        <div class="material-background" id="toggle-menu-left-header">
+            <!--menu header section-->
+            <div class="menu-left-header">
+                <img class="user-img" src="img/profileAvatar.jpg">
+
+                <p>
+                    <span class="title">iGrow-Usee</span>
+                    <!-- <br/> -->
+                    <!-- <span class="sub-title">Material Design Application</span> -->
+                </p>
+            </div><!--end menu header section-->
+        </div> <!--menu content section-->
+        <ion-content id="toggle-menu-left-content">
+
+            <!--If device is android application will present below code.-->
+            <!--It will disable animation to better performance on android.-->
+            <!--list section-->
+            <div ng-if="isAndroid" class="menu-list">
+                <!-- <md-subheader class="md-warn">Application Storage</md-subheader> -->
+                <!--<div class="row menu-item"  ng-click="navigateTo('app.contractlist')">
+                    <div class="col-33">
+                        <i class="fa fa-database"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>SQLite DB</span>
+                    </div>
+                </div>
+                <div class="row menu-item" ng-click="navigateTo('app.notelist')">
+                    <div class="col-33">
+                        <i class="fa fa-cube"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Local Storage DB</span>
+                    </div>
+                </div>
+                <md-subheader class="md-warn">Social Network Connect</md-subheader>
+                <div class="row menu-item"  ng-click="navigateTo('app.wordpressLogin')">
+                    <div class="col-33">
+                        <i class="fa fa-wordpress"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>WordPress</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.facebookLogin')">
+                    <div class="col-33">
+                        <i class="fa fa-facebook"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Facebook</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.googlePlusLogin')">
+                    <div class="col-33">
+                        <i class="fa fa-google-plus"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Google Plus</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.instagramLogin')">
+                    <div class="col-33">
+                        <i class="fa fa-instagram"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Instagram</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.foursquareLogin')">
+                    <div class="col-33">
+                        <i class="fa fa-foursquare"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Foursquare</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.dropboxLogin')">
+                    <div class="col-33">
+                        <i class="fa fa-dropbox"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Dropbox</span>
+                    </div>
+                </div>
+                <md-subheader class="md-warn">Share Application Content</md-subheader>
+                <div class="row menu-item"  ng-click="navigateTo('app.productList')">
+                    <div class="col-33">
+                        <i class="fa fa-share-alt"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Social Share</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.contractUs')">
+                    <div class="col-33">
+                        <i class="fa fa-inbox"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Email & Message</span>
+                    </div>
+                </div>
+                <md-subheader class="md-warn">Advertising Application</md-subheader>
+                <div class="row menu-item"  ng-click="navigateTo('app.googleAdmob')">
+                    <div class="col-33">
+                        <i class="fa fa-money"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Google AdMob</span>
+                    </div>
+                </div>
+                <md-subheader class="md-warn">Push Notification</md-subheader>
+                <div class="row menu-item"  ng-click="navigateTo('app.singlePushNotification')">
+                    <div class="col-33">
+                        <i class="fa fa-sign-in fa-rotate-90"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Single Push</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.schedulePushNotification')">
+                    <div class="col-33">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Schedule Push</span>
+                    </div>
+                </div>
+                <md-subheader class="md-warn">Map API Connect</md-subheader>
+                <div class="row menu-item"  ng-click="navigateTo('app.iosMapConnect')">
+                    <div class="col-33">
+                        <i class="fa fa-map-o"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>IOS Map</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.androidMapConnect')">
+                    <div class="col-33">
+                        <i class="fa fa-map"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Android Map</span>
+                    </div>
+                </div>
+                <md-subheader class="md-warn">Hardware Connect</md-subheader>
+                <div class="row menu-item"  ng-click="navigateTo('app.mobileContractList')">
+                    <div class="col-33">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Mobile Contract</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.imagePicker')">
+                    <div class="col-33">
+                        <i class="fa fa-picture-o"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Image Picker</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.vibration')">
+                    <div class="col-33">
+                        <i class="fa fa-asterisk"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Vibration</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.flashLight')">
+                    <div class="col-33">
+                        <i class="fa fa-bolt"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Flashlight</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.deviceInformation')">
+                    <div class="col-33">
+                        <i class="fa fa-info"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Device Information</span>
+                    </div>
+                </div> -->
+                <!-- <md-subheader class="md-warn">Material User Interface</md-subheader> -->
+                <div class="row menu-item" ng-model="userType" ng-if="userType" ng-click="navigateTo('app.dashboard'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-th-list"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Dashboard</span>
+                    </div>
+                </div>
+                <div class="row menu-item" ng-model="userType" ng-if="!userType" ng-click="navigateTo('app.dashboardv2'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-th-list"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Dashboard</span>
+                    </div>
+                </div>
+<!--                 <div class="row menu-item"  ng-click="navigateTo('app.defaultUI')">
+                    <div class="col-33">
+                        <i class="fa fa-bookmark-o"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Enter Sale</span>
+                    </div>
+                </div> -->
+                <div ng-model="userType" ng-if="userType" class="row menu-item"  ng-click="navigateTo('app.newsFeed'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-newspaper-o"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Sale</span>
+                    </div>
+                </div>
+                <div ng-model="userType" ng-if="userType" class="row menu-item" ng-click="navigateTo('app.defaultUI'); openTabs();">
+
+                    <div class="col-33">
+                        <i class="fa fa-shopping-cart"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Purchase</span>
+                    </div>
+                </div>
+                <div ng-model="userType" ng-if="userType" class="row menu-item"  ng-click="navigateTo('app.catalog'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-credit-card"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Expense</span>
+                    </div>
+                </div>
+                <div ng-model="userType" ng-if="!userType" class="row menu-item"  ng-click="navigateTo('app.catalogv2'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-credit-card"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Expense</span>
+                    </div>
+                </div>
+                <div ng-model="userType" ng-if="!userType" class="row menu-item"  ng-click="navigateTo('app.locationFeed'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-money"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Income</span>
+                    </div>
+                </div>
+                <div class="row menu-item" ng-model="userType" ng-if="!userType" ng-click="navigateTo('app.clothShop'); openTabs();">
+                    <div class="col-33">
+                        <i class="ion-calculator"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Budget</span>
+                    </div>
+                </div>                
+                <div ng-model="userType" ng-if="userType" class="row menu-item"  ng-click="navigateTo('app.expense'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Sales Report</span>
+                    </div>
+                </div>                
+                <div ng-model="userType" ng-if="userType" class="row menu-item"  ng-click="navigateTo('app.pricing'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Purchases Report</span>
+                    </div>
+                </div>
+                <div ng-model="userType" ng-if="userType" class="row menu-item"  ng-click="navigateTo('app.menuDashboard'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Expense Report</span>
+                    </div>
+                </div>
+                <div ng-model="userType" ng-if="!userType" class="row menu-item"  ng-click="navigateTo('app.onlineCourse'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-line-chart"></i>
+                        <ion-icon name="heart"></ion-icon>  
+                    </div>
+                    <div class="col-66">
+                        <span>Income Report</span>
+                    </div>
+                </div>
+                <div ng-model="userType" ng-if="!userType" class="row menu-item"  ng-click="navigateTo('app.donorExpenseReports'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Expense Report</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.contacts'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Contact us</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.fakeLogin'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-sign-out"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Log out</span>
+                    </div>
+                </div>
+
+
+
+
+                <!--<md-subheader class="md-warn">Themes</md-subheader>
+                <div class="row menu-item"  ng-click="navigateTo('app.tryApp'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-diamond"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Try Appppp</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.pricing'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Pricing</span>
+                    </div>
+                </div>
+                -->
+                <!--
+                <div class="row menu-item"  ng-click="navigateTo('app.expense'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-suitcase"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Expense</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.newsFeed'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-newspaper-o"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>News Feed</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.onlineCourse'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Online Course</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.locationFeed'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-flag"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Location Feed</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.cubeFeed'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-cubes"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Cube Feed</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.catalog'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-tags"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Catalog</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.restaurant'); openTabs();">
+                    <div class="col-33">
+                        <i class="fa fa-cutlery"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Restaurant</span>
+                    </div>
+                </div> -->
+            </div>
+
+
+            <!--If device is not Android application will present below code.-->
+            <!--It will show animation when selecting row.-->
+            <md-list ng-if="!isAndroid">
+                <!--<md-subheader class="md-warn">Application Storage</md-subheader>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.contractlist'); openTabs();">
+                    <i class="fa fa-database"></i>
+                    <span>SQLite DB</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.notelist'); openTabs();">
+                    <i class="fa fa-cube"></i>
+                    <span>Local Storage DB</span>
+                </md-list-item>
+                <md-subheader class="md-warn">Social Network Connect</md-subheader>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.wordpressLogin'); openTabs();">
+                    <i class="fa fa-wordpress"></i>
+                    <span>WordPress</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.facebookLogin'); openTabs();">
+                    <i class="fa fa-facebook"></i>
+                    <span>Facebook</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.googlePlusLogin'); openTabs();">
+                    <i class="fa fa-google-plus"></i>
+                    <span>Google Plus</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.instagramLogin'); openTabs();">
+                    <i class="fa fa-instagram"></i>
+                    <span>Instagram</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.foursquareLogin'); openTabs();">
+                    <i class="fa fa-foursquare"></i>
+                    <span>Foursquare</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.dropboxLogin'); openTabs();">
+                    <i class="fa fa-dropbox"></i>
+                    <span>Dropbox</span>
+                </md-list-item>
+                <md-subheader class="md-warn">Share Application Content</md-subheader>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.productList'); openTabs();">
+                    <i class="fa fa-share-alt"></i>
+                    <span>Social Share</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.contractUs'); openTabs();">
+                    <i class="fa fa-inbox"></i>
+                    <span>Email & Message</span>
+                </md-list-item>
+                <md-subheader class="md-warn">Advertising Application</md-subheader>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.googleAdmob'); openTabs();">
+                    <i class="fa fa-money"></i>
+                    <span>Google AdMob</span>
+                </md-list-item>
+                <md-subheader class="md-warn">Push Notification</md-subheader>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.singlePushNotification'); openTabs();">
+                    <i class="fa fa-sign-in fa-rotate-90"></i>
+                    <span>Single Push</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.schedulePushNotification'); openTabs();">
+                    <i class="fa fa-clock-o"></i>
+                    <span>Schedule Push</span>
+                </md-list-item>
+                <md-subheader class="md-warn">Map API Connect</md-subheader>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.iosMapConnect'); openTabs();">
+                    <i class="fa fa-map-o"></i>
+                    <span>IOS Map</span>
+                </md-list-item>
+                  <md-list-item class="menu-list-item" ng-click="navigateTo('app.androidMapConnect'); openTabs();">
+                    <i class="fa fa-map"></i>
+                    <span>Android Map</span>
+                </md-list-item>
+                <md-subheader class="md-warn">Hardware Connect</md-subheader>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.mobileContractList'); openTabs();">
+                    <i class="fa fa-users"></i>
+                    <span>Mobile Contract</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.imagePicker'); openTabs();">
+                    <i class="fa fa-picture-o"></i>
+                    <span>Image Picker</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.vibration'); openTabs();">
+                    <i class="fa fa-asterisk"></i>
+                    <span>Vibration</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.flashLight'); openTabs();">
+                    <i class="fa fa-bolt"></i>
+                    <span>Flashlight</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.deviceInformation'); openTabs();">
+                    <i class="fa fa-info"></i>
+                    <span>Device Information</span>
+                </md-list-item> -->
+                <md-list-item class="menu-list-item"  ng-if="userType" ng-click="navigateTo('app.dashboard'); openTabs();">
+                    <i class="fa fa-th-list"></i>
+                    <span>Dashboard</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="!userType" class="menu-list-item" ng-click="navigateTo('app.dashboardv2'); openTabs();">
+                    <i class="fa fa-th-list"></i>
+                    <span>Dashboard</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="userType" class="menu-list-item" ng-click="navigateTo('app.defaultUI'); openTabs();">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>Purchase</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="userType" class="menu-list-item" ng-click="navigateTo('app.newsFeed'); openTabs();">
+                    <i class="fa fa-newspaper-o"></i>
+                    <span>Sale</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="userType" class="menu-list-item" ng-click="navigateTo('app.catalog'); openTabs();">
+                    <i class="fa fa-credit-card"></i>
+                    <span>Expense</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="!userType" class="menu-list-item" ng-click="navigateTo('app.catalogv2'); openTabs();">
+                    <i class="fa fa-credit-card"></i>
+                    <span>Expense</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="!userType" class="menu-list-item" ng-click="navigateTo('app.locationFeed'); openTabs();">
+                    <i class="fa fa-money"></i>
+                    <span>Income</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="!userType" class="menu-list-item" ng-click="navigateTo('app.clothShop'); openTabs();">
+                    <i class="ion-calculator"></i>
+                    <span>Budget</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="userType" class="menu-list-item" ng-click="navigateTo('app.expense'); openTabs();">
+                    <i class="fa fa-line-chart"></i>
+                    <span>Sales Report</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="userType" class="menu-list-item" ng-click="navigateTo('app.pricing'); openTabs();">
+                    <i class="fa fa-line-chart"></i>
+                    <span>Purchases Report</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="userType" class="menu-list-item" ng-click="navigateTo('app.menuDashboard'); openTabs();">
+                    <i class="fa fa-line-chart"></i>
+                    <span>Expense Report</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="!userType" class="menu-list-item" ng-click="navigateTo('app.onlineCourse'); openTabs();">
+                    <i class="fa fa-line-chart"></i>
+                    <span>Income Report</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" ng-if="!userType" class="menu-list-item" ng-click="navigateTo('app.donorExpenseReports'); openTabs();">
+                    <i class="fa fa-line-chart"></i>
+                    <span>Expense Report</span>
+                </md-list-item>
+                <md-list-item ng-model="userType" class="menu-list-item" ng-click="navigateTo('app.contacts'); openTabs();">
+                    <i class="fa fa-envelope"></i>
+                    <span>Contact us</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.fakeLogin'); openTabs();">
+                    <i class="fa fa-sign-out"></i>
+                    <span>Log out</span>
+                </md-list-item>
+
+                <!--<md-subheader class="md-warn">Themes</md-subheader>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.tryApp'); openTabs();">
+                    <i class="fa fa-diamond"></i>
+                    <span>Try Appzzzz</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.pricing'); openTabs();">
+                    <i class="fa fa-line-chart"></i>
+                    <span>Pricing</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.expense'); openTabs();">
+                    <i class="fa fa-suitcase"></i>
+                    <span>Expense</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.newsFeed'); openTabs();">
+                    <i class="fa fa-newspaper-o"></i>
+                    <span>News Feed</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.onlineCourse'); openTabs();">
+                    <i class="fa fa-line-chart"></i>
+                    <span>Online Course</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.locationFeed'); openTabs();">
+                    <i class="fa fa-flag"></i>
+                    <span>Location Feed</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.cubeFeed'); openTabs();">
+                    <i class="fa fa-cubes"></i>
+                    <span>Cube Feed</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.clothShop'); openTabs();">
+                    <i class="fa fa-heart"></i>
+                    <span>Cloth Shop</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.catalog'); openTabs();">
+                    <i class="fa fa-tags"></i>
+                    <span>Catalog</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.restaurant'); openTabs();">
+                    <i class="fa fa-cutlery"></i>
+                    <span>Restaurant</span> -->
+            </md-list-item>
+            </md-list>
+            <!--end list section-->
+        </ion-content><!--end menu content section-->
+        <!--end menu section-->
+
+    </md-sidenav>
+</ion-side-menus>

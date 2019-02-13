@@ -1,0 +1,199 @@
+View Information-->
+<!--View name : Default User Interface-->
+<!--Controller name : defaultUserInterfaceCtrl-->
+<!--Controller path : www/templates/material-user-interface/default-user-interface/js/controllers.js-->
+<!--State name : app.defaultUI-->
+<!--URL : #app/defaultUI-->
+
+
+
+<!--View Information-->
+<!--View name : Dashboard-->
+<!--Controller name : dashboardCtrl-->
+<!--Controller path : www/templates/material-user-interface/dashboard/js/controllers.js-->
+<!--State name : app.dashboard-->
+<!--URL : #app/dashboard-->
+
+<ion-view title="Record Expenses">
+
+    <!--right button on navigation bar-->
+    <ion-nav-buttons side="right">
+        <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()"
+                   aria-label="Setting">
+            <i class="ion-android-more-vertical"></i>
+        </md-button>
+    </ion-nav-buttons> <!--end right button on navigation bar-->
+
+    <ion-nav-buttons side="left">
+        <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+    </ion-nav-buttons>
+
+
+    <!--toolbar section-->
+    <!-- <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium">
+        <div>
+            <h1>Material Designn</h1>
+
+            <h2>Ionic Material Design</h2>
+        </div>
+        <a class="md-button md-accent md-fab fab-toolbar-medium"
+           aria-label="Add">
+            <i class="icon ion-plus"></i>
+        </a>
+    </md-toolbar> -->
+    <!--end toolbar section-->
+
+    <!--dashboard section-->
+    <ion-content id="dashboard-content" class="expenses">
+
+            <md-card class="searchform">
+                <md-card-content>
+
+                    <!-- <div class="content"> -->
+
+                        <div class="col-100 {{expenseTypewarning}}">
+                            <strong>Required Field</strong>
+                            <em>Select type of expense</em>
+                            <md-select  ng-change="validateForm(1,expenseType);" ng-model="expenseType" aria-label="md-option">
+                                <md-option value="Business Expense">Business expenses</md-option>
+                                <md-option value="Personal Expense">Personal Expense</md-option>
+                                <md-option value="COGS">Stock Expenses</md-option>
+                            </md-select>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="col-100 {{expenseCostwarning}}">
+                            <strong>Required Field</strong>
+                            <em>Cost incurred</em>
+                            <md-input-container md-no-float="" class="md-list-item-full-width">
+                                <input ng-change="validateForm(2,expenseCost);" ng-model="expenseCost" placeholder=" Cost incurred in KES" type="number">
+                            </md-input-container>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="col-100 {{expenseDescwarning}}">
+                            <strong>Required Field</strong>
+                            <em>Expense description</em>
+                            <md-input-container md-no-float="" class="md-list-item-full-width">
+                                <input ng-change="validateForm(3,expenseDesc);" ng-model="expenseDesc" placeholder="Describe the expense">
+                            </md-input-container>
+                        </div>
+                        <div class="clear"></div>
+                        <div ng-show="showFiles" class="uploader {{uploadDescwarning}}">
+
+                            <strong>Required Field</strong>
+                            <i class="fa fa-upload"></i>
+                            <em>Upload a receipt or proof of expenditure.</em> 
+
+                            <h3 ng-model='plural = (uploader.queue.length > 1) ? "files":"file";'>{{ uploader.queue.length }} {{plural}} selected</h3>
+
+                            <div class="progress" style="">
+                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                            </div>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">Name</th>
+                                        <th ng-show="uploader.isHTML5">Size</th>
+                                        <th ng-show="uploader.isHTML5">Progress</th>
+                                        <th>Status</th>
+                                        <th style="display: none;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in uploader.queue">
+                                        <td><strong>{{ item.file.name }}</strong></td>
+                                        <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                        <td ng-show="uploader.isHTML5">
+                                            <div class="progress" style="margin-bottom: 0;">
+                                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <span ng-show="item.isSuccess"><i class="fa fa-check" style="color: green;" aria-hidden="true"></i></span>
+                                            <span ng-show="item.isCancel"><i class="fa fa-ban" style="color: red;" aria-hidden="true"></i></span>
+                                            <span ng-show="item.isError"><i class="fa fa-times" style="color: red;" aria-hidden="true"></i></span>
+                                        </td>
+                                        <td style="display: none;" nowrap>
+                                            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                                <span class="glyphicon glyphicon-upload"></span> Upload
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                                <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                                <span class="glyphicon glyphicon-trash"></span> Remove
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="call-to-action">
+
+                            
+
+
+                            <div class="file-upload">
+                              <div class="file-select">
+                                <div class="file-select-button" id="fileName">Attach File</div>
+                                <div class="file-select-name" id="noFile">No file chosen...</div> 
+                                <input ng-click="showFilesQueue();" type="file" nv-file-select="" uploader="uploader" />
+                              </div>
+                            </div>
+
+
+                          <!--   <button ng-show="showFiles" style="margin-bottom: 45px; background-color: red;" type="button" class="button button-full button-rounded button-green uppercase ultrabold cancel_file" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                                <span class="glyphicon glyphicon-ban-circle"></span> Cancel File
+                            </button> -->
+
+
+
+                            <a href="#" ng-show="showPhoto" ng-click="makeSnapshot();" class="button button-full button-rounded button-green uppercase ultrabold take_photo">Take Photo</a>
+                            
+                            <a href="#" ng-click="submitUploadRecord();" data-menu="menu-confirmation" class="button button-full button-rounded button-green uppercase ultrabold take_photo">Submit Record</a>
+
+                            <!-- <button data-menu="menu-confirmation" style="background-color: green;" type="button" class="button button-full button-rounded button-green uppercase ultrabold remove_file" ng-click="submitUploadRecord();">
+                                <span class="glyphicon glyphicon-trash"></span> Submit Record
+                            </button> -->
+
+                        </div>
+
+                    <!-- </div> -->
+                </md-card-content>
+            </md-card>
+
+
+
+
+    </ion-content><!--end dashboard section-->
+
+
+
+        <!-- <a class="md-button md-accent md-fab sell" ng-click='sellItems(); showConfirmDialog($event)' aria-label="Shop">
+            <i class="fa fa-shopping-cart"></i>
+        </a> -->
+
+
+    <ion-tabs class="tabs-icon-bottom">
+        <ion-tab title="Home" icon="ion-home" ui-sref="app.recordExpense">
+        </ion-tab>
+        <ion-tab title="Add Sale" icon="ion-cash" ui-sref="app.menuDashboard">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.expense">
+        </ion-tab>
+        <!--<ion-tab title="Add Sale" icon="ion-cash" ui-sref="app.instagramFeed">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.instagramFeed">
+        </ion-tab> -->
+    </ion-tabs>
+
+
+</ion-view>
+
+
+
+
+
+<!--angular template section-->
+
+<!--end angular template section

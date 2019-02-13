@@ -1,0 +1,39 @@
+<!--View Information-->
+<!--View name : Fake Login-->
+<!--State name : app.fakeLogin-->
+<!--URL : #app/fakeLogin-->
+
+<ion-view class="loginpage" title="Sign In">
+    <!--left button on navigation bar-->
+    <!--login content section-->
+    <ion-content id="social-login" class="bg-white">
+        <!--fake login form section-->
+        <div class="ui-progress-circular" ng-show="login_loader">
+            <ion-spinner ng-if="!isAndroid" class="progress-circular"></ion-spinner>
+            <md-progress-circular ng-if="isAndroid" md-mode="indeterminate"></md-progress-circular>
+        </div>
+
+        <form class="fakeLogin-form">
+            <div>
+                <img src="img/profileAvatar.jpg"/>
+            </div>
+            <div class="sub-header">Sign in to iGrow uSee</div>
+
+            <div id="fakeLogin">
+                <md-input-container md-no-float="">
+                    <input ng-model="username" class="user-name" placeholder="Username">
+                </md-input-container>
+                <hr/>
+                <md-input-container md-no-float="">
+                    <input ng-model="password" class="user-password" type="password" placeholder="Password">
+                </md-input-container>
+                <p ng-show="authStatus" style="color: red;">Wrong username or password</p>
+            </div>
+            <div>
+                <a ng-click='authData(username,password)' class="md-raised social-button md-button md-default-theme login_btn">
+                    Sign In
+                </a>
+            </div>
+        </form> <!--end fake login form section-->
+    </ion-content><!--end login content section-->
+</ion-view>

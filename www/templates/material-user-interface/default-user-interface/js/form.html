@@ -1,0 +1,20 @@
+<md-card class="form">
+   <md-card-content>
+      <div class="col-100 {{expenseDescwarning}}">
+         <strong>Required Field</strong> <em>Name of product/service</em> 
+         <md-input-container md-no-float="" class="md-list-item-full-width"> <input ng-change="parent.validateForm(1,expenseDesc);" ng-model="parent.prodName" placeholder="Name the product/service"> </md-input-container>
+      </div>
+      <div class="clear"></div>
+      <div class="col-100 {{expenseCostwarning}}">
+         <strong>Required Field</strong> <em>Selling Price</em> 
+         <md-input-container md-no-float="" class="md-list-item-full-width"> <input ng-change="parent.validateForm(2,expenseCost);" ng-model="parent.sell_price" placeholder="How much will you sell it for in KES?" type="number"> </md-input-container>
+      </div>
+      <div class="clear"></div>
+      <div class="col-100 {{expenseCostwarning}}">
+         <strong>Required Field</strong> <em>Cost Price</em> 
+         <md-input-container md-no-float="" class="md-list-item-full-width"> <input ng-change="parent.validateForm(3,expenseCost);" ng-model="parent.cost_price" placeholder="How much did you buy it for in KES?" type="number"> </md-input-container>
+      </div>
+      <div class="clear"></div>
+      <div class="col-100"> <a href="#" ng-click="parent.addStockItemsDialog(); cancel();" data-menu="menu-confirmation" class="button button-full button-rounded button-green uppercase ultrabold take_photo">Submit Record</a> <a href="#" ng-click="ok();" data-menu="menu-confirmation" class="button button-full button-rounded uppercase ultrabold take_photo">Cancel</a></div>
+   </md-card-content>
+</md-card>

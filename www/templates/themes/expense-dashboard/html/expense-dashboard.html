@@ -1,0 +1,153 @@
+<!--View Information-->
+<!--View name : Dashboard-->
+<!--Controller name : dashboardCtrl-->
+<!--Controller path : www/templates/material-user-interface/dashboard/js/controllers.js-->
+<!--State name : app.dashboard-->
+<!--URL : #app/dashboard-->
+
+<ion-view view-title="Revenue Reports">
+
+    <!--right button on navigation bar-->
+    <ion-nav-buttons side="right">
+        <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()"
+                   aria-label="Setting">
+            <i class="ion-android-more-vertical"></i>
+        </md-button>
+    </ion-nav-buttons> <!--end right button on navigation bar-->
+
+    <ion-nav-buttons side="left">
+        <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+    </ion-nav-buttons>
+
+
+    <!--toolbar section-->
+    <!-- <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium">
+        <div>
+            <h1>Material Designn</h1>
+
+            <h2>Ionic Material Design</h2>
+        </div>
+        <a class="md-button md-accent md-fab fab-toolbar-medium"
+           aria-label="Add">
+            <i class="icon ion-plus"></i>
+        </a>
+    </md-toolbar> -->
+    <!--end toolbar section-->
+
+    <!--dashboard section-->
+    <ion-content id="dashboard-content" class="expense-report the-revenue-report noscroll">
+
+        <!--list section-->
+
+        <!--Below code it will disable animation to better performance-->
+
+
+        <md-card class='chartjs'>
+
+            <div class="md-actions" layout="row" layout-align="end center">
+                <a ng-init="weeksBarCharts()" ng-click="weeksBarCharts()" class="md-button active-tab-pill" ng-class="weekRevSummary">Weeks</a>
+                <a ng-show="true" ng-click="monthlyBarCharts()" class="md-button" ng-class="weekRevSummary">Months</a>
+                <a ng-show="true" ng-click="yearlyBarCharts()" class="md-button" ng-class="weekExpSummary">Year</a>
+            </div>
+
+            <!-- Start weeks Tabs -->
+            <ion-scroll direction="x" class="tabs_weeks" ng-show="tabs_weeks">
+                <div class="md-actions weeks" layout="row" layout-align="end center">
+                    <a ng-repeat="week in allWeeks" ng-init="activeWeek = getCurrentWk(week.weekCount); hideWkPeriod = futureWk(week.weekCount); activeDuration((week.weekCount),(week.start.date),(week.end.date),(week.start.month),(week.end.month),0)" ng-model="fromMonth = getTheMonth(week.start.month); toMonth = getTheMonth(week.end.month)" ng-click="weeklyBarCharts((week.start.date),(week.end.date),(week.start.month),(week.end.month)); activeDuration((week.weekCount),(week.start.date),(week.end.date),(week.start.month),(week.end.month),1);" id="rev-{{activeWeek}}" class="md-button {{activeWeek}}" ng-hide="hideWkPeriod;" data-tab-pill="tab-pill-week-drill">Week {{week.weekCount}}<span>{{fromMonth}} {{week.start.date}} - {{toMonth}} {{week.end.date}}</span></a>
+                </div>
+            </ion-scroll>
+            <!-- End weeks Tabs -->
+
+            <!-- Start months Tabs -->
+            <ion-scroll direction="x" class="tabs_months" ng-show="tabs_months">
+                <div class="md-actions months" layout="row" layout-align="end center">
+                    <a ng-repeat="month in yearData" ng-init="activeMonth = getCurrentMth(month.mthCount); hideMthPeriod = futureMth(month.mthCount); theActiveMonth(month.mthCount,month.mthCount,month.mthCount,0)" ng-model="fromMth = getTheMonth(month.mthCount); toMth = getTheMonth(month.mthCount)" ng-click="theMonthlyBarCharts((month.mthCount),(month.mthCount)); theActiveMonth(month.mthCount,month.mthCount,month.mthCount,1)" id="rev-{{activeMonth}}" class="{{activeMonth}}" ng-hide="hideMthPeriod;" data-tab-pill="tab-pill-month-drill">{{month.name}}</a>
+                </div>
+            </ion-scroll>
+            <!-- End months Tabs -->
+
+            <!-- Start years Tabs -->
+            <ion-scroll direction="x" class="tabs_years" ng-show="tabs_years">
+                <div class="md-actions years" layout="row" layout-align="end center">
+
+                  <a ng-repeat="year in yearsData" ng-init="activeYr = getCurrentYr(year.name); theActiveYear(year.yrCount,year.yrCount,year.yrCount,0)" ng-model="fromYr = getTheYear(year.yrCount); toYr = getTheYear(year.yrCount)" ng-click="theYearlyBarCharts((year.name),(year.name)); theActiveYear(year.yrCount,year.yrCount,year.yrCount,1)" id="rev-{{activeYr}}" class="{{activeYr}}" data-tab-pill="tab-pill-year-drill">{{year.name}}</a>
+
+                </div>
+            </ion-scroll>
+            <!-- End years Tabs -->
+
+            <md-card-content>
+
+
+                <h6 style="
+                    margin-bottom: 15px;
+                    text-align: center;
+                ">Top {{noOfBestSellers}} Selling Products</h6>
+                <h6 style="margin:0;font-size: 12px; display: none;">KES {{todayStats}}<span style="
+                    float: none;
+                    font-size: 8px;
+                    margin-left: 3px;
+                ">last 24 Hrs<span></span></span></h6>
+
+                <div class="chartjs">
+                    <canvas id="myChartRev"></canvas>
+                </div>
+
+            </md-card-content>
+        </md-card>
+
+        <ion-scroll direction="y" style="min-height:110vh; max-height:110vh;">
+            <div class="recentStats" ng-click="touchClick()" ng-style="initStyles">
+                <md-subheader>Recent Sales</md-subheader>
+                <md-subheader>{{errorArrays}}</md-subheader>
+
+                <md-card ng-repeat="item in monthlySales" class="recent">
+                    <md-card-content>
+                        <div class="invoice-box revenue" ng-if="item.itemCount">
+                            <p>Revenue</p>
+                            <div class="invoice-box-header" data-toggle-box="invoice-therev{{date}}">
+                                <strong ng-init="date = getKey(item);">{{date}}</strong><u class="color-black">KES {{item.dayTotal}}
+                                <del class="color-gray-dark">{{item.itemCount}} Items sold</del>
+                                </u>
+                            </div>
+                                <div ng-repeat="prod in item" class="invoice-box-content" id="invoice-therev{{date}}">
+                                    <div>
+                                        <div class="decoration bottom-0 top-30"></div>
+                                        <!-- <div class="invoice-box-item">
+                                            <em>Amount:</em> <strong>KES {{item.dayTotal}}</strong>
+                                        </div> -->
+                                        <div ng-repeat="prodItem in prod | orderBy:'-ts'" class="invoice-box-item">
+                                            <em>Sold at: {{prodItem.time}}<span>Qty: {{prodItem.quantity}}</span></em> 
+                                            <a href="#">{{prodItem.itemTitle}}<u>KES {{prodItem.itemSellPrice}}</u></a>
+                                        </div>
+                                        <!-- <div class="decoration bottom-0 top-10"></div> -->
+                                    </div>
+                                </div>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </ion-scroll>
+
+    </ion-content><!--end dashboard section-->
+
+
+    <ion-tabs class="tabs-icon-bottom">
+        <ion-tab class="hide" title="Home" icon="ion-home" ui-sref="app.expense">
+        </ion-tab>
+        <ion-tab title="Add Sale" icon="ion-cash" ui-sref="app.newsFeed">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.catalog">
+        </ion-tab>
+        <ion-tab title="Sales Report" icon="ion-record" ng-click="openTabs();" ui-sref="app.expense">
+        </ion-tab>
+        <ion-tab title="Expense Report" icon="ion-record" ui-sref="app.menuDashboard">
+        </ion-tab>
+        <!--<ion-tab title="Add Sale" icon="ion-cash" ui-sref="app.instagramFeed">
+        </ion-tab>
+        <ion-tab title="Add Expense" icon="ion-card" ui-sref="app.instagramFeed">
+        </ion-tab> -->
+    </ion-tabs>
+
+
+</ion-view>

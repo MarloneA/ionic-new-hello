@@ -1,52 +1,173 @@
+﻿<!--This is a main HTML file of project default page when application start.-->
+<!--All reference of css and javascript lib is here.-->
+
 <!DOCTYPE html>
 <html>
-  <head>
+
+<!--head section This is a place of all reference of css and javascript lib-->
+<head>
+    <!-- Meta section -->
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="format-detection" content="telephone=no"> <!-- To disable phone number typing.-->
+    <!-- end Meta section -->
     <title></title>
 
-    <link rel="manifest" href="manifest.json">
+    <!-- Font reference section -->
+    <link href="lib/robotodraft/robotodraft.css">
+    <!-- end Font reference section -->
 
-    <!-- un-comment this code to enable service worker
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(() => console.log('service worker installed'))
-          .catch(err => console.log('Error', err));
-      }
-    </script>-->
+    <!-- CSS reference section -->
+    <link rel="stylesheet" href="css/ionic.app.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet prefetch" href="lib/angular-material/angular-material.css">
+    <link rel="stylesheet" href="lib/font-awesome-4.4.0/css/font-awesome.css">
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/material-datetimepicker.css">
+    <link href="css/progresscircles.css?v=1.2.1" rel="stylesheet" />
+    <!-- end CSS reference section -->
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
 
-    <!-- ionic/angularjs js -->
+    <!-- jQuery section-->
+    <script src="lib/jQuery/jquery.js"></script>
+    <!-- end jQuery section-->
+
+    <!-- Ionic javascript lib -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!-- end Ionic javascript lib -->
 
-    <!-- cordova script (this will be a 404 during development) -->
+    <!-- Angular javascript lib -->
+    <script src="lib/angular-messages/angular-messages.js"></script>
+    <script src="lib/angular-aria/angular-aria.js"></script>
+    <script src="lib/angular-material/angular-material.js"></script>
+    <!-- end Angular javascript lib -->
+
+    <!-- Cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
+    <!-- end Cordova script -->
 
-    <!-- your app's js -->
+    <!--ionic framework ngIOS9UIWebViewPatch-->
+    <!--Learn more about ngIOS9UIWebViewPatch at : http://blog.ionic.io/ios-9-potential-breaking-change/-->
+    <script src="lib/ngIOS9UIWebViewPatch/angular-ios9-uiwebview.patch.js"></script>
+    <!--end ionic framework ngIOS9UIWebViewPatch-->
+
+    <script src="lib/charts/Chart.bundle.js"></script>
+    <script src="lib/charts/Chart.js"></script>
+    
+    <!-- Custom libs section-->
+    <script src="lib/firebase/firebase.js"></script>
+    <script src="lib/firebase/angularfire.min.js"></script>
+    <script type="text/javascript" src="lib/angular-file-upload/angular-file-upload.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-touch/1.7.5/angular-touch.min.js"></script> -->
+    <script src='lib/datepicker/ion-datetime-picker.min.js'></script>
+    <!-- End of Custom libs section-->
+
+    <!-- app.js section-->
     <script src="js/app.js"></script>
+    <!-- end app.js section-->
+
+    <!-- Controllers section-->
     <script src="js/controllers.js"></script>
-    <script src="js/services.js"></script>
-  </head>
-  <body ng-app="starter">
-    <!--
-      The nav bar that will be updated as we navigate between views.
-    -->
-    <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
-    </ion-nav-bar>
-    <!--
-      The views will be rendered in the <ion-nav-view> directive below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).
-    -->
-    <ion-nav-view></ion-nav-view>
-  </body>
+    <script src="js/shared/directives.js"></script>
+    <script src="js/shared/filter.js"></script>
+    <script src="js/shared/controllers.js"></script>
+    <script src="templates/menu/js/controllers.js"></script>
+    <script src="templates/material-user-interface/dashboard/js/controllers.js"></script>
+    <script src="templates/material-user-interface/dashboardv2/js/controllers.js"></script>
+    <script src="templates/application-storage/sqLite/js/controllers.js"></script>
+    <script src="templates/application-storage/sqLite/js/services.js"></script>
+    <script src="templates/application-storage/local-application-db/js/controllers.js"></script>
+    <script src="templates/application-storage/local-application-db/js/services.js"></script>
+    <script src="templates/social-network-connect/facebook/js/controllers.js"></script>
+    <script src="templates/social-network-connect/instagram/js/controllers.js"></script>
+    <script src="templates/social-network-connect/google-plus/js/controllers.js"></script>
+    <script src="templates/social-network-connect/foursquare/js/controllers.js"></script>
+    <script src="templates/social-network-connect/dropbox/js/controllers.js"></script>
+    <script src="templates/share-application-content/social-share/js/controllers.js"></script>
+    <script src="templates/share-application-content/email-message/js/controllers.js"></script>
+    <script src="templates/hardware-connect/device-information/js/controllers.js"></script>
+    <script src="templates/hardware-connect/mobile-contract/js/controllers.js"></script>
+    <script src="templates/hardware-connect/flash-light/js/controllers.js"></script>
+    <script src="templates/hardware-connect/vibration/js/controllers.js"></script>
+    <script src="templates/advertising-application/googleAdmob/js/controllers.js"></script>
+    <script src="templates/hardware-connect/image-picker/js/controllers.js"></script>
+    <script src="templates/social-network-connect/wordpress/js/controllers.js"></script>
+    <script src="templates/material-user-interface/dashboard/js/controllers.js"></script>
+    <script src="templates/material-user-interface/default-user-interface/js/controllers.js"></script>
+    <script src="templates/themes/news-feed/js/controllers.js"></script>
+    <script src="templates/themes/location-feed/js/controllers.js"></script>
+    <script src="templates/themes/contacts/js/controllers.js"></script>
+    <script src="templates/themes/online-course/js/controllers2.js"></script>
+    <script src="templates/themes/donor-budget/js/controllers.js"></script>
+    <script src="templates/themes/authentication/js/controllers.js"></script>
+
+
+
+
+    <script src="templates/material-user-interface/record-expense/js/controllers.js"></script>
+    <script src="templates/themes/menu-dashboard/js/controllers2.js"></script>
+    <script src="templates/themes/donor-expreport/js/controllers2.js"></script>
+    <script src="templates/themes/expense-dashboard/js/controllers2.js"></script>
+    <script src="templates/themes/purchases-reports/js/controllers2.js"></script>
+    <script src="templates/themes/recordexpense_investor/js/controllers.js"></script>
+    <script src="templates/themes/catalogv2/js/controllers.js"></script>
+    <script src="templates/push-notification/single-push-notification/js/controllers.js"></script>
+    <script src="templates/push-notification/schedule-push-notification/js/controllers.js"></script>
+    <script src="templates/map-and-location/ios-map-connect/js/controllers.js"></script>
+    <script src="templates/map-and-location/android-map-connect/js/controllers.js"></script>
+    <!-- end Controllers section-->
+
+
+</head><!-- end head section-->
+
+<!--body section-->
+<body ng-app="starter" class="hide-native-scroll-y">
+
+<!--Custom Style section-->
+<style type="text/css">
+    {{customStyle}}
+</style><!-- end Custom Style section-->
+
+<!-- Ionic navigation bar section-->
+<ion-nav-view class="qqqqq"></ion-nav-view>
+<!-- end Ionic navigation bar section-->
+
+</body><!-- end body section-->
+
+
+<!-- Angular custom template section-->
+
+<!--Share template confirm-dialog section-->
+<script type="text/ng-template" id="confirm-dialog.html">
+    <md-dialog aria-label="confirm-dialog">
+        <form>
+            <md-dialog-content>
+                <div>
+                    <h2 class="md-title">{{displayOption.title}}</h2>
+
+                    <p>{{displayOption.content}}</p>
+                </div>
+            </md-dialog-content>
+            <div class="md-actions" layout="row">
+                <a class="md-primary-color dialog-action-btn" ng-click="cancel()">
+                    {{displayOption.cancel}}
+                </a>
+                <a class="md-primary-color dialog-action-btn" ng-click="ok()">
+                    {{displayOption.ok}}
+                </a>
+            </div>
+        </form>
+    </md-dialog>
+</script> <!-- end share template confirm-dialog section-->
+
+<!-- Share template toast section-->
+<script type="text/ng-template" id="toast.html">
+    <md-toast class="toast-form">
+        <span flex>{{displayOption.title}}</span>
+    </md-toast>
+</script><!-- end share template toast section-->
+
+<!-- end Angular custom template section-->
+
 </html>
